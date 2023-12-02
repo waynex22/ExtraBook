@@ -1,0 +1,1 @@
+export {default as useDebounc} from './useDebounce'

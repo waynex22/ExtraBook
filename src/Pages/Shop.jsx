@@ -1,7 +1,11 @@
-import React from "react";
+import React  from "react";
+import ProductList from "../Components/ProductList";
 const Shop = () => {
+   
     return (
-   <h1>Shop</h1>
+    <div className="py-16">
+   <ProductList />
+   </div>
     )
 }
 
