@@ -1,14 +1,16 @@
 import React , {createContext, useState, useEffect} from 'react'
-import axios from 'axios'
+import * as request from '../utils/request'
 export const CategoryContext = createContext()
 const CategoryProvider = ({children}) => {
   const [categories, setCategories] = useState([])
   useEffect(() => {
     const fecthProduct = async () => {
-      await axios.get(`http://localhost:3009/api/category`)
-      .then((res) => {
-        setCategories(res.data)
-      })
+      try {
+        const res = await request.get('category')
+        setCategories(res)
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
     }
     fecthProduct()
   }, [])

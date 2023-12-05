@@ -12,5 +12,12 @@ export const post = async ( path , options = {}) => {
     const response = await request.post(path , options)
     return response
 }
-
+export const put = async ( path , options = {}) => {
+    const response = await request.put(path , options)
+    return response
+}
+export const deleteById = async ( path , options = {}) => {
+    const response = await request.delete(path , options)
+    return response
+}
 export default request

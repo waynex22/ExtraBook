@@ -2,9 +2,14 @@ import React, { useContext } from 'react'
 import CartItem from './CartItem'
 import { CartContext } from '../Contexts/cartContext'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../Contexts/authContext'
 const Cart = () => {
-    const { cart, deleteAllCart, total, itemAmount } = useContext(CartContext)
+    const { user } = useContext(AuthContext)
+    console.log(user);
+    const { cart, deleteAllCart, total, itemAmount ,totalAfterVat} = useContext(CartContext)
+    // console.log(totalAfterVat);
     const formattedPrice = total.toLocaleString().replace(/,/g, '.')
+    const formattedTotal = totalAfterVat.toLocaleString().replace(/,/g, '.')
     return (
         <section className='container mx-auto h-screen my-16'>
             <h1 className='text-xl'>GIỎ HÀNG ({itemAmount} sản phẩm)</h1>
@@ -62,11 +67,18 @@ const Cart = () => {
                         <div className='h-[1px] my-4 w-full bg-gray-300'></div>
                         <div className='flex justify-between items-center'>
                             <span>Tổng số Tiền (gồm VAT)</span>
-                            <span className='text-red-800 text-xl font-bold'>{formattedPrice} đ</span>
+                            <span className='text-red-800 text-xl font-bold'    >{formattedTotal} đ</span>
                         </div>
-                        <Link to='/checkout' className='px-20 text-2xl py-6 flex justify-center items-center mt-10 bg-red-800 cursor-move text-white font-bold rounded-xl'>
-                            <span> Thanh toán</span>
-                        </Link>
+                        {itemAmount === 0 && (
+                            <Link  className='px-20 text-2xl py-6 flex justify-center items-center mt-10 bg-gray-300 cursor-context-menu text-white font-bold rounded-xl'>
+                                <span> Thanh toán</span>
+                            </Link>
+                        )}
+                        {itemAmount > 0 && (
+                            <Link to='/checkout' className='px-20 text-2xl py-6 flex justify-center items-center mt-10 bg-red-800 cursor-move text-white font-bold rounded-xl'>
+                                <span> Thanh toán</span>
+                            </Link>
+                        )}
                     </div>
                     <div>
 

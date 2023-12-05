@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react"
 import { Link } from 'react-router-dom'
-import LoginModal from '../../../Modal/LoginModal/login';
+import LoginModal from '../../../Modal/authModal/authUser';
 import Search from "../../../Components/Search";
 import { AuthContext } from "../../../Contexts/authContext";
 import { CartContext } from "../../../Contexts/cartContext";
@@ -9,11 +9,14 @@ const Header = () => {
     const { user, logout } = useContext(AuthContext)
     const {itemAmount} = useContext(CartContext)
     const [isMenuOpen, setMenuOpen] = useState(false);
+    const handleMenuClose = () => {
+        setMenuOpen(false);
+      };
     return (
         <nav className="bg-white border-gray-200 ">
             <div className="max-w-screen- w-full container flex flex-wrap items-center justify-between mx-auto ">
                 <Link to='/' className="flex justify-start">
-                    <img src="https://imgv3.fotor.com/images/blog-richtext-image/CNN-Logo.png" className="h-[80px] w-full"
+                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/774ba0fd-c421-4cba-9f2b-56b562cc850c/dad334l-85a94053-c912-42ee-b8b8-dce283ccf278.png/v1/fill/w_1600,h_900/byviruzz_xtra_watermark_by_flopperdesigns_dad334l-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTAwIiwicGF0aCI6IlwvZlwvNzc0YmEwZmQtYzQyMS00Y2JhLTlmMmItNTZiNTYyY2M4NTBjXC9kYWQzMzRsLTg1YTk0MDUzLWM5MTItNDJlZS1iOGI4LWRjZTI4M2NjZjI3OC5wbmciLCJ3aWR0aCI6Ijw9MTYwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.h9EofU2LHb6WborFfv269nJvC2wnjEMHXpCgRHqeugk" className="h-[80px] w-full"
                         alt="Flowbite Logo" />
                 </Link>
                 <div className="flex relative md:order-2 items-center">
@@ -44,6 +47,7 @@ const Header = () => {
                             <button
                                 type="button"
                                 onClick={() => setMenuOpen(!isMenuOpen)}
+                                
                                 className="inline-flex items-center justify-center p-2 border border-transparent text-base leading-6 font-medium  transition ease-in-out duration-150"
                             >
                                 <p className="font-semi-bold mr-3">Tài khoản</p>
@@ -54,12 +58,12 @@ const Header = () => {
                             {isMenuOpen && (
                                 <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg">
                                     <div className="rounded-md bg-white shadow-xs">
-                                        <div className="py-1 cursor-pointer">
+                                        <div className="py-1 cursor-pointer" onMouseLeave={handleMenuClose}>
                                             <div className="flex flex-col pb-4 justify-center items-center">
                                                 <p>Xin chào: {user.data.name}</p>
                                             </div>
                                             {user.data.role === 'admin' && (
-                                                <Link to='/'
+                                                <Link to='/admin'
                                                     className="block px-4 py-2 w-full text-sm text-gray-700 hover:bg-gray-100 transition duration-150 ease-in-out"
                                                 >
                                                     Quản lí Admin
@@ -109,7 +113,7 @@ const Header = () => {
                         <li>
                             <Link to="/news"
                                 className="block py-2 pl-3 pr-4 text-gray-500 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-red-700 md:p-0 md:dark:hover:text-red-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Sự
-                                Kiện</Link>
+                                kiện</Link>
                         </li>
                         <li>
                             <Link to="/contact"

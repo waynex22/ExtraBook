@@ -99,7 +99,8 @@ const CartProvider = ({children}) => {
     }, 0)
     setTotal(total)
   },[cart])
-  return <CartContext.Provider value={{cart, addToCart,popup, removeFromCart, deleteAllCart, plusAmountItems, minusAmountItems, itemAmount, setItemAmount, total}}>{children}</CartContext.Provider>
+  const totalAfterVat = total * (1 + 0.03)
+  return <CartContext.Provider value={{cart, addToCart,popup, removeFromCart, deleteAllCart, plusAmountItems, minusAmountItems, itemAmount, setItemAmount, total, totalAfterVat}}>{children}</CartContext.Provider>
 }
 CartProvider.propTypes = {
   children: PropTypes.node.isRequired,

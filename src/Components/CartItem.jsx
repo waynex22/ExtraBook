@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { CartContext } from '../Contexts/cartContext'
 const CartItem = ({ item }) => {
     const { removeFromCart, plusAmountItems, minusAmountItems } = useContext(CartContext)
@@ -16,14 +17,14 @@ const CartItem = ({ item }) => {
                     <img className="object-cover object-center w-full rounded-t-lg h-96 md:h-auto md:w-48 "
                         src={image} alt='' />
                 </div>
-                <div className='flex flex-col justify-center items-start col-span-2'>
-                    <div className='my-4 text-gray-500'>
+                <Link to={`/product/${_id}`} className='flex flex-col justify-center items-start col-span-2 '>
+                    <div className='my-4 text-gray-500 hover:text-gray-900 hover:underline'>
                         {title}
                     </div>
                     <div className='text-md font-bold '>
                         {formattedPrice} đ
                     </div>
-                </div>
+                </Link>
                 <div>
                     <div className="flex justify-between items-center h-[40px] rounded-xl w-[120px] bg-transparent border-solid border-2 border-gray-200">
                         <div onClick={() => minusAmountItems(_id)} className="p-2 cursor-pointer hover:text-red-500 text-gray-500">

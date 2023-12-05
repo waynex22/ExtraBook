@@ -5,14 +5,13 @@ export const AuthContext = createContext()
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState('')
-  const token = localStorage.getItem('token')
   const login = async ({ name, password }) => {
     try {
       const response = await request.post('account/login', {
         name,
         password,
       })
-      
+
       if (response.status === 204) {
         setMessage('Không tìm thấy tên tài khoản')
       }
@@ -20,7 +19,7 @@ const AuthProvider = ({ children }) => {
         setMessage('Sai mật khẩu')
       } else {
         setMessage('Đăng nhập thành công')
-        const {token} = response.data
+        const { token } = response.data
         localStorage.setItem('token', token)
         userAuth()
       }
@@ -30,16 +29,20 @@ const AuthProvider = ({ children }) => {
   }
   useEffect(() => {
     userAuth()
-  },[token])
-    const userAuth = async () => {
-      try {
-        const token = localStorage.getItem('token')
-        const response = await request.post('account/user/', {token} )
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  const userAuth = async () => {
+    try {
+      const token = localStorage.getItem('token')
+      const response = await request.post('account/user/', { token })
+      setTimeout(() => {
         setUser(response.data)
-      } catch (error) {
-        console.log(error.response)
-      }
+      },100)
+      
+    } catch (error) {
+      console.log('chua login')
     }
+  }
   const register = async ({ name, email, password }) => {
     try {
       const response = await request.post('account/add', {
@@ -49,11 +52,14 @@ const AuthProvider = ({ children }) => {
       })
       if (response.status === 201) {
         setMessage('Đăng ký thành công')
+        setTimeout(() => {
+          login({name, password})
+        }, 500)
       }
-      else if(response.status === 209){
+      else if (response.status === 209) {
         setMessage('Tài khoản đã được sử dụng')
       }
-      else{
+      else {
         setMessage('Email đã được sử dụng')
       }
     } catch (error) {

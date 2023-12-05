@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className=" px-4 sm:w-2/3 lg:w-3/12">
                     <div className="h-fit top-0">
                         <Link to='/' className="mb-4 mt-[-20px] inline-block max-w-[160px]">
-                            <img src="https://imgv3.fotor.com/images/blog-richtext-image/CNN-Logo.png"
+                            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/774ba0fd-c421-4cba-9f2b-56b562cc850c/dad334l-85a94053-c912-42ee-b8b8-dce283ccf278.png/v1/fill/w_1600,h_900/byviruzz_xtra_watermark_by_flopperdesigns_dad334l-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9OTAwIiwicGF0aCI6IlwvZlwvNzc0YmEwZmQtYzQyMS00Y2JhLTlmMmItNTZiNTYyY2M4NTBjXC9kYWQzMzRsLTg1YTk0MDUzLWM5MTItNDJlZS1iOGI4LWRjZTI4M2NjZjI3OC5wbmciLCJ3aWR0aCI6Ijw9MTYwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.h9EofU2LHb6WborFfv269nJvC2wnjEMHXpCgRHqeugk"
                                 className="h-[100px]" alt="Extra Logo" />
                         </Link>
                         <p className="text-base text-body-color dark:text-dark-6 mb-7">

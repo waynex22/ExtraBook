@@ -8,8 +8,10 @@ import CategoryProvider from './Contexts/categoryContext';
 import AuthProvider from './Contexts/authContext';
 import AccountProvider from './Contexts/accountContext';
 import CartProvider from './Contexts/cartContext';
+import CommentProvider from './Contexts/commentContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+    <CommentProvider>
     <CartProvider>
         <AccountProvider>
             <AuthProvider>
@@ -21,4 +23,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             </AuthProvider>
         </AccountProvider>
     </CartProvider>
+    </CommentProvider>
 );

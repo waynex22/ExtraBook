@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react"
-import { TEAnimation } from "tw-elements-react"
 import { Link, useParams } from "react-router-dom"
 import { ProductContext } from "../Contexts/productContext"
 import { CartContext } from '../Contexts/cartContext'
 import Popup from "./Popup"
+import { TEAnimation } from "tw-elements-react"
+import { Rating } from 'flowbite-react'
+import Loader from "./loader"
 const DetailProduct = () => {
     const { id } = useParams()
     const [quantity, setQuantity] = useState(1)
@@ -26,26 +28,23 @@ const DetailProduct = () => {
     // console.log(cart)
     if (!product) {
         return <section className="h-screen flex justify-center items-center ">
-            loading...
+            <Loader />
         </section>
-    }
+    }   
+    const rating = product.average_score / 2
+    const filledStars = Array.from({ length: rating }, (_, index) => index + 1);
     const formattedPrice = product.price.toLocaleString().replace(/,/g, '.')
     return (
         <section className="text-gray-700 body-font mt-16 ">
             <div className="container px-5 py-24 mx-auto shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] overflow-hidden bg-white">
-                <TEAnimation
-                    animation="[slide-right_1s_ease-in-out]"
-                    reset
-                >
                     <Popup trigger={popup}>
-                        <div className="flex flex-col justify-center items-center">
+                        <div className="flex flex-col bg-green-400 p-4 rounded-xl justify-center items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 text-white h-10">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
                             </svg>
-                            <span className="text-2xl text-white font-bold">Thêm giỏ hàng thành công</span>
+                            <span className="text-xl text-white font-bold">Thêm giỏ hàng thành công</span>
                         </div>
                     </Popup>
-                </TEAnimation>
                 <div className="lg:w-4/5 mx-auto flex">
                     <img alt="{product.title}" className="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
                         src={product.image} />
@@ -53,31 +52,14 @@ const DetailProduct = () => {
                         <h2 className="text-sm title-font text-gray-500 tracking-widest">XTRA</h2>
                         <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.title}</h1>
                         <div className="flex items-start justify-start mb-5">
-                            <svg className="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 22 20">
-                                <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg className="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 22 20">
-                                <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg className="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 22 20">
-                                <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg className="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 22 20">
-                                <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
-                            <svg className="w-4 h-4 text-gray-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 22 20">
-                                <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                            </svg>
+                        <Rating>
+                            {filledStars.map((star, index) => (
+                                <Rating.Star key={index}/>
+                            ))}
+                            {Array.from({ length: 5 - rating }, (_, index) => (
+                                <Rating.Star key={rating + index} filled={false} />
+                            ))}
+                        </Rating>
                             <div className="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">({product.review_count})</div>
                         </div>
                         <div className="mt-4 flex items-center justify-between">
@@ -146,7 +128,7 @@ const DetailProduct = () => {
                         </div>
                     </div>
                 </div>
-            </div>:
+            </div>
             <div className="w-full bg-white shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-lg overflow-hidden gap-4 h-fit mt-4">
                 <div className="flex mx-4 my-4 justify-start items-center">
                     <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/event_cart_2/ico_coupon_red.svg?q=10341" alt="sale" />
@@ -204,7 +186,7 @@ const DetailProduct = () => {
                     </div>
                 </TEAnimation>
             </div>
-            <div className="container px-5 py-24 mt-6 mx-auto shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]  bg-white rounded-xl">
+            <div className="container px-5 py-24 mt-6 mx-auto shadow-[0_3px_10px_rgb(0,0,0,0.2)]  bg-white rounded-xl">
                 <div className="w-full h-fit mx-4">
                     <h1 className="font-bold text-2xl text-gray-800">Thông tin sản phẩm</h1>
                     <div className="w-[600px]">
