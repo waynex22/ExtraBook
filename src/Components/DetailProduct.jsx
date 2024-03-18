@@ -5,7 +5,8 @@ import { CartContext } from '../Contexts/cartContext'
 import Popup from "./Popup"
 import { TEAnimation } from "tw-elements-react"
 import { Rating } from 'flowbite-react'
-import Loader from "./loader"
+import Loader from "./Loader"
+import {formattedNumber} from '../utils/formatteNumber'
 const DetailProduct = () => {
     const { id } = useParams()
     const [quantity, setQuantity] = useState(1)
@@ -31,9 +32,11 @@ const DetailProduct = () => {
             <Loader />
         </section>
     }   
+    // console.log(percentPrice);
     const rating = product.average_score / 2
     const filledStars = Array.from({ length: rating }, (_, index) => index + 1);
-    const formattedPrice = product.price.toLocaleString().replace(/,/g, '.')
+    const percentPrice = (product.discount_price / product.price) * 100
+    const priceAfterDiscount = product.price - product.discount_price
     return (
         <section className="text-gray-700 body-font mt-16 ">
             <div className="container px-5 py-24 mx-auto shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] overflow-hidden bg-white">
@@ -80,8 +83,15 @@ const DetailProduct = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="my-6">
-                            <h2 className="text-2xl font-bold text-red-800">{formattedPrice} đ</h2>
+                        <div className="my-6 flex items-center">
+                            <h2 className="text-2xl font-bold text-red-800">{formattedNumber(priceAfterDiscount)} đ</h2>
+                            <div className="flex items-center ml-4">
+                           <div className="w-[120px relative h-fit">
+                           <h2 className="text-sm  font-bold text-gray-500">{formattedNumber(product.price)} đ</h2>
+                           <div className="absolute h-[1px] bg-black w-[80px] top-[10px]"></div>
+                           </div>
+                            <div className="ml-4 p-2 bg-red-600 text-white rounded-lg font-bold">{Math.round(percentPrice)}%</div>
+                            </div> 
                         </div>
                         <div className="flex flex-col w-[500px]">
                             <div className="flex mt-2">

@@ -90,12 +90,13 @@ const CartProvider = ({children}) => {
 
   const deleteAllCart = () => {
     setCart([])
-  }
+  } 
   const [total , setTotal] = useState(0)
 
   useEffect(() => {
     const total = cart.reduce((acamulator , currenItem) => {
-      return acamulator + currenItem.price * currenItem.amount   
+      const price = currenItem.price - currenItem.discount_price
+      return acamulator + price * currenItem.amount   
     }, 0)
     setTotal(total)
   },[cart])

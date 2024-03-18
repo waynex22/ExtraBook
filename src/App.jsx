@@ -1,24 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import { publicRoutes } from './Routes';
-import { DefaultLayout } from './Layout';
-import { privateRoutes } from './Routes';
-import { AdminLayout } from './Layout';
-import { AuthContext } from './Contexts/authContext';
+import { publicRoutes } from './Routes'
+import { DefaultLayout } from './Layout'
+import { privateRoutes } from './Routes'
+import { AdminLayout } from './Layout'
+import { AuthContext } from './Contexts/authContext'
+import Loader from './Components/Loader'
 const App = () => {
   const { user } = useContext(AuthContext)
   const hasRole = (role) => {
     if (!user) {
-      return <p>Check role</p>
+      return <Loader />
     } else {
-      const userRole = user.data.role;
-      return userRole === role;
+      const userRole = user.data.role
+      return userRole === role
     }
-  };
-
+  }
   const PrivateRoute = ({ element, role }) => {
-    return hasRole(role) ? element : <Navigate to="/" />;
-  };
+    return hasRole(role) ? element : <Navigate to="/" />
+  }
   return (
     <Router>
       <div className="App">
@@ -36,20 +36,20 @@ const App = () => {
             />
           })}
           {privateRoutes.map((route, index) => {
-            const Layout = AdminLayout;
-            const Page = route.component;
+            const Layout = AdminLayout
+            const Page = route.component
             return (
               <Route
                 key={index}
                 path={route.path}
                 element={<PrivateRoute element={<Layout><Page /></Layout>} role={route.role} />}
               />
-            );
+            )
           })}
         </Routes>
       </div>
     </Router>
 
-  );
+  )
 }
-export default App;
+export default App

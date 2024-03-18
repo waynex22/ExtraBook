@@ -3,7 +3,7 @@ import CommentItem from './CommentItem'
 import { Rating, RatingAdvanced, RatingStar } from 'flowbite-react'
 import { CommentContext } from '../Contexts/commentContext'
 import { useParams } from 'react-router-dom'
-import Loader from './loader'
+import Loader from './Loader'
 const CommentList = () => {
     const { id } = useParams()
     const { comments } = useContext(CommentContext)
@@ -20,7 +20,7 @@ const CommentList = () => {
             <>
                 <Rating className="mb-2" >
                     <RatingStar />
-                    <RatingStar />
+                    <RatingStar />  
                     <RatingStar />
                     <RatingStar />
                     <RatingStar />
@@ -28,7 +28,7 @@ const CommentList = () => {
                 </Rating>
                 <div className="mb-4 text-sm font-medium text-gray-500">Số lượng đánh giá ({listCommentById.length})</div>
                 {[5,4,3,2,1].map(index => (
-                    <RatingAdvanced key={index}  percentFilled={listRating.filter(item => item === index ) * 20  } theme={customTheme} className="mb-2">
+                    <RatingAdvanced key={index}  percentFilled={listRating.filter(item => item === index) * 20  } theme={customTheme} className="mb-2">
                         {`${index} sao`}
                     </RatingAdvanced>
                 ))}

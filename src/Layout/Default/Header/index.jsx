@@ -24,7 +24,7 @@ const Header = () => {
                     <Link to='/cart'>
                     <div className="flex items-center relative mr-8 justify-center h-10 w-10  text-gray-500  rounded-full group-hover:bg-red-500 cursor-pointer">
                     {itemAmount > 0 && (
-                        <div className="absolute mb-8 ml-10 h-[20px] w-[20px] bg-red-600 rounded-full flex justify-center items-center text-white">{itemAmount}</div>
+                        <div className="absolute mb-8 ml-10 h-[23px] w-[23px] bg-red-600 rounded-full flex justify-center items-center text-white">{itemAmount}</div>
                         )}
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +74,7 @@ const Header = () => {
                                             >
                                                 Thông tin cá nhân
                                             </Link>
-                                            <Link to='/'
+                                            <Link to='/myorder'
                                                 className="block px-4 py-2  w-full text-sm text-gray-700 hover:bg-gray-100 transition duration-150 ease-in-out"
                                             >
                                                 Lịch sử mua hàng

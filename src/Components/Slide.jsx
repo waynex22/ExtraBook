@@ -11,8 +11,8 @@ const Slide = () => {
           <img src="https://nhasachphuongnam.com/images/promo/267/YES_2023_890x396__5_.jpg" alt="..." />
           <img src="https://nhasachphuongnam.com/images/promo/265/Banner_KM_Bang_Dia_890x396px_Mesa_de_trabajo_1__2_.jpg" alt="..." />
           <img src="https://nhasachphuongnam.com/images/promo/265/Banner_Lich_2024_890x396px-01.jpg" alt="..." />
-          <img src="https://cdn0.fahasa.com/media/magentothem/banner7/TDochoiT12_Banner_840x320_1.jpg" alt="..." />
-          <img src="https://cdn0.fahasa.com/media/magentothem/banner7/DochoiT1123_BannerSlide_840x320.jpg" alt="..." />
+          <img src="https://bookbuy.vn/Res/Images/Album/a40c5ff3-1b53-46cb-be24-bebdf2efed08.jpg?w=880&scale=both&h=320&mode=crop" alt="..." />
+          <img src="https://pibook.vn/upload/banner/backtoschool.png" alt="..." />
         </Carousel>
       </div>
       <div className="col-span-1 overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-lg">

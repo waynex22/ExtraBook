@@ -2,14 +2,11 @@ import React, { useContext } from 'react'
 import CartItem from './CartItem'
 import { CartContext } from '../Contexts/cartContext'
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../Contexts/authContext'
+import {formattedNumber} from '../utils/formatteNumber'
+
 const Cart = () => {
-    const { user } = useContext(AuthContext)
-    console.log(user);
     const { cart, deleteAllCart, total, itemAmount ,totalAfterVat} = useContext(CartContext)
-    // console.log(totalAfterVat);
-    const formattedPrice = total.toLocaleString().replace(/,/g, '.')
-    const formattedTotal = totalAfterVat.toLocaleString().replace(/,/g, '.')
+    // console.log(cart);
     return (
         <section className='container mx-auto h-screen my-16'>
             <h1 className='text-xl'>GIỎ HÀNG ({itemAmount} sản phẩm)</h1>
@@ -28,7 +25,7 @@ const Cart = () => {
                         <div>
                             <span className='ml-4'>Số Lượng</span>
                         </div>
-                        <div className='col-span-2'>
+                        <div className='col-span-2'>    
                             <span className='ml-16'>Thành Tiền</span>
                         </div>
                         <div></div>
@@ -36,7 +33,7 @@ const Cart = () => {
                     {itemAmount > 0 && (
                         <div className='h-fit w-full my-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] py-4 rounded-lg'>
                             {cart.map(item => {
-                                return <CartItem item={item} key={item._id} />
+                                return <CartItem item={item} key={item._id} />  
                             })}
                         </div>
                     )}
@@ -62,12 +59,13 @@ const Cart = () => {
                     <div className='mx-4 my-4'>
                         <div className='flex justify-between items-center'>
                             <span className='text-xl text-gray-600 '>Thành tiền</span>
-                            <span className=' text-xl font-bold'>{formattedPrice} đ</span>
+                            <span className=' text-xl font-bold'>{formattedNumber(total)} đ</span>
                         </div>
                         <div className='h-[1px] my-4 w-full bg-gray-300'></div>
+                        <span>VAT (3%)</span>
                         <div className='flex justify-between items-center'>
                             <span>Tổng số Tiền (gồm VAT)</span>
-                            <span className='text-red-800 text-xl font-bold'    >{formattedTotal} đ</span>
+                            <span className='text-red-800 text-xl font-bold' >{formattedNumber((parseInt(totalAfterVat)))} đ</span>
                         </div>
                         {itemAmount === 0 && (
                             <Link  className='px-20 text-2xl py-6 flex justify-center items-center mt-10 bg-gray-300 cursor-context-menu text-white font-bold rounded-xl'>

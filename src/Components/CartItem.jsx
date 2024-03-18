@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../Contexts/cartContext'
+import {formattedNumber} from '../utils/formatteNumber'
 const CartItem = ({ item }) => {
     const { removeFromCart, plusAmountItems, minusAmountItems } = useContext(CartContext)
-    const { _id, title, image, price, amount } = item
-    const priceAmount = price * amount
-    const formattedPrice = price.toLocaleString().replace(/,/g, '.')
-    const formattedPriceAmount = priceAmount.toLocaleString().replace(/,/g,'.')
+    const { _id, title, image, price, amount, discount_price } = item
+    const priceAfterDiscount = price - discount_price
+    const priceAmount = priceAfterDiscount * amount
     return (
         <section>
             <div className='grid grid-cols-8 gap-4 mt-10 items-center'>
@@ -21,8 +21,12 @@ const CartItem = ({ item }) => {
                     <div className='my-4 text-gray-500 hover:text-gray-900 hover:underline'>
                         {title}
                     </div>
-                    <div className='text-md font-bold '>
-                        {formattedPrice} đ
+                    <div className=" flex items-center justify-start">
+                        <h2 className="text-xl font-bold text-red-800">{formattedNumber(priceAfterDiscount)} đ</h2>
+                    </div>
+                    <div className=' relative '>
+                        <h2 className='text-sm text-gray-500'>{formattedNumber(price)} đ</h2>
+                        <div className="absolute h-[1px] bg-black w-[75px] top-[10px]"></div>
                     </div>
                 </Link>
                 <div>
@@ -41,7 +45,7 @@ const CartItem = ({ item }) => {
                     </div>
                 </div>
                 <div className='col-span-2'>
-                    <h2 className="text-xl items-center flex justify-center font-bold text-red-800">{formattedPriceAmount} đ</h2>
+                    <h2 className="text-xl items-center flex justify-center font-bold text-red-800">{formattedNumber(priceAmount)} đ</h2>
                 </div>
                 <div onClick={() => removeFromCart(_id)} className='flex cursor-pointer hover:text-red-600 justify-center items-center'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 p-6h-6">

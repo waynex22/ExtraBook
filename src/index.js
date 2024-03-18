@@ -9,19 +9,25 @@ import AuthProvider from './Contexts/authContext';
 import AccountProvider from './Contexts/accountContext';
 import CartProvider from './Contexts/cartContext';
 import CommentProvider from './Contexts/commentContext';
+import CheckoutProvider from './Contexts/checkoutContext';
+import OrderProvider from './Contexts/orderContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <CommentProvider>
-    <CartProvider>
-        <AccountProvider>
-            <AuthProvider>
-                <CategoryProvider>
-                    <ProductProvider>
-                        <App />
-                    </ProductProvider>
-                </CategoryProvider>
-            </AuthProvider>
-        </AccountProvider>
-    </CartProvider>
-    </CommentProvider>
+    <OrderProvider>
+        <CheckoutProvider>
+            <CommentProvider>
+                <CartProvider>
+                    <AccountProvider>
+                        <AuthProvider>
+                            <CategoryProvider>
+                                <ProductProvider>
+                                    <App />
+                                </ProductProvider>
+                            </CategoryProvider>
+                        </AuthProvider>
+                    </AccountProvider>
+                </CartProvider>
+            </CommentProvider>
+        </CheckoutProvider>
+    </OrderProvider>
 );

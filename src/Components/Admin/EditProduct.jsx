@@ -14,6 +14,7 @@ const EditProduct = () => {
         author: '',
         image: '',
         price: 0,
+        discount_price: 0,
         category_id: '',
         year: 0,
         isbn: '',
@@ -27,6 +28,7 @@ const EditProduct = () => {
                 author: product.author || '',
                 image: product.image || '',
                 price: product.price || 0,
+                discount_price: product.discount_price || 0,
                 category_id: product.category_id || '',
                 year: product.year || 0,
                 isbn: product.isbn || '',
@@ -146,6 +148,18 @@ const EditProduct = () => {
                             name="price"
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                             value={newProduct.price}
+                            onChange={handleChange}
+                            required=""
+                        />
+                        <label htmlFor="discount_price" className="block my-2 text-sm font-medium text-gray-900">
+                            Giảm giá
+                        </label>
+                        <input
+                            type="text"
+                            id="discount_price"
+                            name="discount_price"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                            value={newProduct.discount_price}
                             onChange={handleChange}
                             required=""
                         />

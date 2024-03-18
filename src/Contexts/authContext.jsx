@@ -4,6 +4,8 @@ export const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  const [id , setId] = useState(null) 
+  const token = localStorage.getItem('token')  
   const [message, setMessage] = useState('')
   const login = async ({ name, password }) => {
     try {
@@ -28,7 +30,14 @@ const AuthProvider = ({ children }) => {
     }
   }
   useEffect(() => {
-    userAuth()
+    if(user){
+      setId(user.data.id)
+    }
+  },[user])
+  useEffect(() => {
+    if(token){
+      userAuth()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const userAuth = async () => {
@@ -40,7 +49,7 @@ const AuthProvider = ({ children }) => {
       },100)
       
     } catch (error) {
-      console.log('chua login')
+      // console.log('chua login')
     }
   }
   const register = async ({ name, email, password }) => {
@@ -66,14 +75,13 @@ const AuthProvider = ({ children }) => {
       console.log(error)
     }
   }
-
   const logout = () => {
     localStorage.removeItem('token')
     setUser(null)
     setMessage('')
   }
 
-  return (<AuthContext.Provider value={{ user, login, register, logout, message }}>{children}</AuthContext.Provider>
+  return (<AuthContext.Provider value={{ user, login, register, logout, message, id }}>{children}</AuthContext.Provider>
   )
 }
 

@@ -13,6 +13,7 @@ const CreateProduct = () => {
         author: '',
         image: '',
         price: 0,
+        discount_price: 0,
         category_id: '',
         year: 0,
         isbn: '',
@@ -132,6 +133,20 @@ const CreateProduct = () => {
                             value={product.price}
                             onChange={handleChange}
                             required=""
+                            placeholder='VND'
+                        />
+                         <label htmlFor="discount_price" className="block my-2 text-sm font-medium text-gray-900">
+                            Giảm giá
+                        </label>
+                        <input
+                            type="text"
+                            id="discount_price"
+                            name="discount_price"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                            value={product.discount_price}
+                            onChange={handleChange}
+                            required=""
+                            placeholder='VND'
                         />
                     </div>
                 </div>
